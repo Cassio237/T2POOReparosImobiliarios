@@ -3,7 +3,7 @@ package ufu;
 public class Imovel {
 	private int id;
 	private static int contador = 200;
-	private String endereco; //teste
+	private String endereco;
 	private Cliente cliente; //Relaciono um cliente a o imovel sempre, regra de negocio
 	
 	public Imovel(String endereco, Cliente cliente) {
