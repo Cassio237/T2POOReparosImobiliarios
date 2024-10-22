@@ -5,7 +5,7 @@ public class Materiais {
 	private int quantidade;
 	private Double valor,  valorTotal;
 	
-	public Materiais(String nome, Integer quantidade, Double valor) {
+	public Materiais(String nome, int quantidade, Double valor) {
 		this.nome = nome;
 		this.quantidade = quantidade;
 		this.valor = valor;

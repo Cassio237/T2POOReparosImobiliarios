@@ -4,7 +4,7 @@ public class Imovel {
 	private int id;
 	private static int contador = 200;
 	private String endereco;
-	private Cliente cliente; //Relaciono um cliente a o imovel sempre, regra de negocio
+	private Cliente cliente; //Relaciona um cliente ao imovel
 	
 	public Imovel(String endereco, Cliente cliente) {
 		this.id = contador++;

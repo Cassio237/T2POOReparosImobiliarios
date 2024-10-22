@@ -3,7 +3,7 @@ package ufu;
 import java.util.ArrayList;
 
 public class Servico implements Material, Reparo{
-	private static int contador = 400;
+	private static int contador = 1;
 	private int id;
 	private Prestador prestador;
 	private Double valorServico, valorMateriais;
@@ -21,7 +21,7 @@ public class Servico implements Material, Reparo{
 		this.id = contador++;
 	}
 	
-	public void addMateriais(String nome, Integer quantidade, Double valor) {
+	public void addMateriais(String nome, int quantidade, Double valor) {
 		Materiais materiais = new Materiais(nome, quantidade, valor);
 		listaMateriais.add(materiais);
 		valorMateriais = materiais.getValorTotal();
@@ -36,7 +36,7 @@ public class Servico implements Material, Reparo{
 	
 	@Override
 	public Double valorMateriais() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -49,11 +49,11 @@ public class Servico implements Material, Reparo{
 	}
 
 	@Override
-	public boolean temMateriais() {
+	public boolean temMateriais(boolean temMaterial) {
 		if (temMateriais == false) {
-			return true;
+			return temMateriais = true;
 		}
-		return false;
+		return temMateriais = false;
 	}
 
 	@Override
@@ -102,6 +102,10 @@ public class Servico implements Material, Reparo{
 
 	public boolean isComproMateriais() {
 		return comproMateriais;
+	}
+
+	public Double getValorMateriais() {
+		return valorMateriais;
 	}
 
 }

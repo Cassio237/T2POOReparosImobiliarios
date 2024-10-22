@@ -13,7 +13,13 @@ public class Main {
 		sistema.listarImovel();
 		sistema.criarImovel("Joao Naves 3000", "Jo");
 		sistema.listarImovel();
+		autoOrcamento();
+		sistema.listaOrcamento();
 		
+		sistema.listarFinancas();
+		sistema.listaOrcamento();
+		sistema.aprovarOrcamento(500, false);
+		sistema.listarFinancas();
 	}
 	
 	public static void autoCliente() {
@@ -33,6 +39,21 @@ public class Main {
 	public static void autoImovel() {
 		sistema.criarImovel("Joao Naves 3000", "Jose Maria");
 		sistema.criarImovel("Rua Floriano Peixoto 80", "Imobiliaria do Zé");
+	}
+	
+	public static void autoOrcamento() {
+		sistema.iniciarOrcamento(200, "Jose Maria");
+		sistema.addServicoOrcamento(300, 200.0, "Limpeza");
+		sistema.addItensOrcamento("Limpeza", "Torneira", 2, 20.0);
+		
+		sistema.iniciarOrcamento(201, "Imobiliaria do Zé");
+		sistema.addServicoOrcamento(301, 300.0, "Limpeza");
+		sistema.addItensOrcamento("Limpeza", "Tomada", 2, 10.0);
+		sistema.aprovarOrcamento(true);
+		
+		sistema.addServicoOrcamento(500, 300, 300.0, "Pintura");
+		sistema.aprovarOrcamento(500, false);
+		
 	}
 
 }
