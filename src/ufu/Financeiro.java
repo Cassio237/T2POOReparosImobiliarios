@@ -1,13 +1,12 @@
 package ufu;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Financeiro {
 	private static int contador = 700;
 	private int id;
 	private Orcamento orcamento;
-	private Date data;
+	private LocalDate data;
 	private Boolean pago;
 	private Cliente responsavel;
 	private Double valor;
@@ -15,7 +14,7 @@ public class Financeiro {
 	public Financeiro(Orcamento orcamento, Boolean pago, Cliente responsavel, Double valor) {
 		this.id = contador++;
 		this.orcamento = orcamento;
-		this.data = new Date();
+		this.data = LocalDate.now();
 		this.pago = pago;
 		this.responsavel = responsavel;
 		this.valor = valor;
@@ -30,11 +29,11 @@ public class Financeiro {
 		this.orcamento = orcamento;
 	}
 
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 

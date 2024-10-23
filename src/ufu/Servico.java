@@ -35,12 +35,6 @@ public class Servico implements Material, Reparo{
 	}
 	
 	@Override
-	public Double valorMateriais() {
-		
-		return null;
-	}
-
-	@Override
 	public boolean concluirReparos() {
 		if (concluido == false) {
 			return true;
@@ -102,6 +96,10 @@ public class Servico implements Material, Reparo{
 
 	public boolean isComproMateriais() {
 		return comproMateriais;
+	}
+	
+	public void setComproMateriais(boolean comproMateriais) {
+		this.comproMateriais = comproMateriais;
 	}
 
 	public Double getValorMateriais() {

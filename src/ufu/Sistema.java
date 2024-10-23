@@ -1,7 +1,6 @@
 package ufu;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Sistema {
 	ArrayList<Cliente> clientes = new ArrayList<>();
@@ -61,19 +60,27 @@ public class Sistema {
 	}
 	
 	public Prestador pegaPrestador(int id) {
-		for(Prestador prestador : prestadores) {
-			if(prestador.getId() == id) {
-				return prestador;
+		try {
+			for(Prestador prestador : prestadores) {
+				if(prestador.getId() == id) {
+					return prestador;
+				}
 			}
+		} catch (Exception e) {
+			System.out.println("sistema.pegaPrestador" + e);
 		}
 		return null;
 	}
 	
 	public Cliente pegaCliente(String nome) {
-		for(Cliente cliente : clientes) {
-			if (cliente.getNome().equalsIgnoreCase(nome)) {
-				return cliente;
+		try {
+			for(Cliente cliente : clientes) {
+				if (cliente.getNome().equalsIgnoreCase(nome)) {
+					return cliente;
+				}
 			}
+		} catch (Exception e) {
+			System.out.println("Sitema.pegaCliente" + e);
 		}
 		return null;
 	}
@@ -104,10 +111,14 @@ public class Sistema {
 	}
 	
 	public Imovel pegaImovel(int id) {
-		for(Imovel imovel : imoveis) {
-			if(imovel.getId() == id) {
-				return imovel;
+		try {
+			for(Imovel imovel : imoveis) {
+				if(imovel.getId() == id) {
+					return imovel;
+				}
 			}
+		} catch (Exception e) {
+			System.out.println("sistema.pegaImovel" + e);
 		}
 		return null;
 	}
@@ -137,23 +148,21 @@ public class Sistema {
 	
 	public Orcamento pegaOrcamento(int id) {
 		try {
-			listaOrcamento();
 			for(Orcamento orcamento : orcamentos) {
-				if(orcamento.getCliente().getId() == id) {
+				if(orcamento.getId() == id) {
 					return orcamento;
 				}
 			}
 		} catch (Exception e) {
 			System.out.println("sistema.pegaOrcamento" + e);
 		}
-		return ultiOrcamento;
+		return null;
 	}
 	
 	public void addServicoOrcamento(int idPrestador, Double valor, String tipoServico) {
 		try {
 			Prestador prestador = pegaPrestador(idPrestador);
 			ultiOrcamento.criarServico(prestador, valor, tipoServico);
-			ultiOrcamento.calcularOrcamento();
 			System.out.println("Adicionado!");
 		} catch (Exception e) {
 			System.out.println("sistema.addServicoOrcamento - ultimo" + e);
@@ -165,8 +174,6 @@ public class Sistema {
 			Orcamento orcamento = pegaOrcamento(idOrcamento);
 			Prestador prestador = pegaPrestador(idPrestador);
 			orcamento.criarServico(prestador, valor, tipoServico);
-			System.out.println(orcamento.getServicos(tipoServico).getValorMateriais());
-			orcamento.calcularOrcamento();
 			System.out.println("Adicionado!");
 		} catch (Exception e) {
 			System.out.println("sistema.addServicoOrcamento - por ID " + e);
@@ -177,7 +184,6 @@ public class Sistema {
 		try {
 			ultiOrcamento.addMateriaisServico(tipoServico, nome, quantidade, valor);
 			System.out.println("Adicionado!! Listando intens orçamento:");
-			ultiOrcamento.setValorOrcamento(ultiOrcamento.somarMateriais(tipoServico));
 			ultiOrcamento.listaServico();
 			System.out.println("Adicionado!");
 		} catch (Exception e) {
@@ -190,7 +196,6 @@ public class Sistema {
 			Orcamento orcamento = pegaOrcamento(idOrcamento);
 			orcamento.addMateriaisServico(tipoServico, nome, quantidade, valor);
 			System.out.println("Adicionado!! Listando intens orcamento:");
-			orcamento.setValorOrcamento(ultiOrcamento.somarMateriais(tipoServico));
 			orcamento.listaServico();
 		} catch (Exception e) {
 			System.out.println("sistema.addItensOrcamento por ID " + e);
@@ -207,9 +212,7 @@ public class Sistema {
 	
 	public void aprovarOrcamento(int idOrcamento, boolean pago) { // com sobrecarga buscar e aprovar outro orcamento
 		try {
-			System.out.println("Teste sobrecarga");
 			Orcamento orcamento = pegaOrcamento(idOrcamento);
-			System.out.println(orcamento.getCliente().getNome());
 			financas.add(new Financeiro(orcamento, pago, orcamento.getCliente(), orcamento.getValorOrcamento()));
 		} catch (Exception e) {
 			System.out.println("sistema.aprovarOrcamento ID" + e);
@@ -217,10 +220,15 @@ public class Sistema {
 	}
 	
 	public void listarFinancas() {
-		for(Financeiro financa : financas) {
-			System.out.printf("ID: %d - Cliente: %s - Endereco: %s - Valor: RS %.2f Data: %s - Pago: %s\n", financa.getId(), financa.getResponsavel().getNome(),
-					financa.getOrcamento().getImovel().getEndereco(), financa.getValor(), financa.getData(), financa.getPago());
+		try {
+			for(Financeiro financa : financas) {
+				System.out.printf("ID: %d - Cliente: %s - Endereco: %s - Valor: RS %.2f Data: %s - Pago: %s\n", financa.getId(), financa.getResponsavel().getNome(),
+						financa.getOrcamento().getImovel().getEndereco(), financa.getValor(), financa.getData(), financa.getPago());
+			}
+		} catch (Exception e) {
+			System.out.println("sistema.listaFinancas" + e);
 		}
+
 	}
 
 }

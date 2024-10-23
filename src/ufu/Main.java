@@ -4,7 +4,6 @@ public class Main {
 	static Sistema sistema = new Sistema();
 
 	public static void main(String[] args) {
-		System.out.println("teste");
 		autoCliente();
 		sistema.listarClientes();
 		autoPrestador();
@@ -14,12 +13,9 @@ public class Main {
 		sistema.criarImovel("Joao Naves 3000", "Jo");
 		sistema.listarImovel();
 		autoOrcamento();
-		sistema.listaOrcamento();
-		
-		sistema.listarFinancas();
-		sistema.listaOrcamento();
-		sistema.aprovarOrcamento(500, false);
-		sistema.listarFinancas();
+		//sistema.listaOrcamento();
+		//sistema.listarFinancas();
+
 	}
 	
 	public static void autoCliente() {
@@ -53,7 +49,6 @@ public class Main {
 		
 		sistema.addServicoOrcamento(500, 300, 300.0, "Pintura");
 		sistema.aprovarOrcamento(500, false);
-		
 	}
 
 }

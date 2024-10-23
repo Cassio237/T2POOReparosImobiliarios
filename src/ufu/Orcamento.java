@@ -20,61 +20,55 @@ public class Orcamento {
 	}
 	
 	public void criarServico(Prestador prestador, Double valor, String tipo) {
-		if (prestador == null || valor == null || tipo == null) {
-			throw new IllegalArgumentException("Prestador, valor ou tipo de serviço está nulo");
-		}
-		servicos.add(new Servico(prestador, valor, tipo));
+		try {
+			if (prestador == null || valor == null || tipo == null) {
+				throw new IllegalArgumentException("Prestador, valor ou tipo de serviço errado, Tente Novamente!");
+			}
+			servicos.add(new Servico(prestador, valor, tipo));
+			valorOrcamento = valorOrcamento + valor;
+		} catch (Exception e) {
+			System.out.println("orcamento.criarServico" + e);
+		}	
 	}
 	
 	public Servico pegaServico(String tipo) {
-		for(Servico servico : servicos) {
-			if(servico.getTipo().equals(tipo)) {
-				return servico;
+		try {
+			for(Servico servico : servicos) {
+				if(servico.getTipo().equals(tipo)) {
+					return servico;
+				}
 			}
+		} catch (Exception e) {
+			System.out.println("orcamento.pegaServico" + e);
 		}
 		return null;
 	}
 	
 	public void addMateriaisServico(String tipo, String nome, int quantidade, Double valor) {
-		Servico servico = pegaServico(tipo);
-		if(servico == null) {
-			System.out.println("Serviço nao iniciado, para adicionar materiais inicie um serviço!!");
-			return;
-		}
-		servico.temMateriais(servico.isTemMateriais());
-		servico.addMateriais(nome, quantidade, valor);
-	}
-	
-	public void listaMaterias() {
-		for(Servico servico : servicos) {
-			servico.listaMateriais();
+		try {
+			Servico servico = pegaServico(tipo);
+			if(servico == null) {
+				System.out.println("Serviço nao iniciado, para adicionar materiais inicie um serviço!!");
+				return;
 			}
+			servico.temMateriais(servico.isTemMateriais());
+			servico.addMateriais(nome, quantidade, valor);
+			valorOrcamento = valorOrcamento + valor * quantidade;
+		} catch (Exception e) {
+			System.out.println("orcamento.addMateriasServico" + e);
+		}
 	}
 	
-	public Double calcularOrcamento() {
-		for(Servico servico : servicos) {
-			if(servico.getValorServico() != null) {
-				valorOrcamento = valorOrcamento + servico.getValorServico();
-				if(servico.isTemMateriais()) {
-					if (servico.valorMateriais() != null) {
-						valorOrcamento = valorOrcamento + servico.valorMateriais();
-					}
+	public void listaMateriais() {
+		try {
+			for(Servico servico : servicos) {
+				servico.listaMateriais();
 				}
-			}
+		} catch (Exception e) {
+			System.out.println("orcamento.listaMateriais" + e);
 		}
-		return valorOrcamento;
 	}
-	
-	public Double somarMateriais(String tipo) {
-		Servico servico = pegaServico(tipo);
-		if(servico.isTemMateriais()) {
-			valorOrcamento = servico.getValorServico() + servico.getValorMateriais();
-			System.out.println(valorOrcamento);
-			return valorOrcamento;
-		}
-		return valorOrcamento;
-	}
-	
+		
 	public void listaServico() {
 		try {
 			for(Servico servico : servicos) {
@@ -87,7 +81,7 @@ public class Orcamento {
 				System.out.printf("Valor total do Orçamento: %.2f\n", valorOrcamento);
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("orcamento.listaServico" + e);
 		}
 	}
 
