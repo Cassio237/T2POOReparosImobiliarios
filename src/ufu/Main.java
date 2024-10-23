@@ -86,8 +86,9 @@ public class Main {
 			case 4:
 				System.out.println("1 - Fazer Orçamento");
 				System.out.println("2 - Listar Orçamento");
-				System.out.println("3 - Continua Orçamento");
-				System.out.println("4 - Aprovar Orçamento");
+				System.out.println("3 - Listar Orçamento Detalhado");
+				System.out.println("4 - Continua Orçamento");
+				System.out.println("5 - Aprovar Orçamento");
 				System.out.println("0 - Voltar");
 				opcaoMenu = lerInt();
 				switch (opcaoMenu) {
@@ -98,9 +99,12 @@ public class Main {
 					sistema.listaOrcamento();
 					break;
 				case 3:
-					continuarOrcamento();
+					orcamentoDetalhado();
 					break;
 				case 4:
+					continuarOrcamento();
+					break;
+				case 5:
 					aprovaOrcamento();
 					break;
 				case 0:
@@ -145,6 +149,15 @@ public class Main {
 		int idOrcamento = lerInt();
 		
 		sistema.aprovarOrcamento(idOrcamento, true);
+	}
+	
+	public static void orcamentoDetalhado() {
+		System.out.println("*** Lista de Orcamentos para auxiliar***");
+		sistema.listaOrcamento();
+		System.out.println("Digite o ID do orcamento a ser detalhado abaixo");
+		int idOrcamento = lerInt();
+		
+		sistema.listaOrcamentoDetalhado(idOrcamento);
 	}
 	
 	public static void continuarOrcamento() {
@@ -218,6 +231,7 @@ public class Main {
 		System.out.println("Digite o ID do imovel abaixo");
 		int idImovel = lerInt();
 		System.out.println("***Lista de nome dos cliente para auxiliar***");
+		sistema.listarClientes();
 		System.out.println("Digite o nome do responsavel pelo orcamento (Precisa já estar cadastrado)");
 		String clienteNome = lerString();
 		
@@ -281,6 +295,7 @@ public class Main {
 	
 	public static void cadastraImovel() {
 		System.out.println("***Lista de nome dos cliente para auxiliar***");
+		sistema.listarClientes();
 		System.out.println("Digite o nome dono do imovel abaixo (Precisa já esta cadastrado)");
 		String nome = lerString();
 		System.out.println("Digite o endereco do imovel abaixo");
@@ -316,7 +331,7 @@ public class Main {
 	}
 	
 	public static void menu() {
-		System.out.println("Escolha uma opção:");
+		System.out.println("\nEscolha uma opção abaixo:");
 		System.out.println("1 - Clientes");
 		System.out.println("2 - Imoveis");
 		System.out.println("3 - Prestadores");

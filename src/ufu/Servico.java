@@ -44,10 +44,7 @@ public class Servico implements Material, Reparo{
 
 	@Override
 	public boolean temMateriais(boolean temMaterial) {
-		if (temMateriais == false) {
-			return temMateriais = true;
-		}
-		return temMateriais = false;
+		return temMateriais = true;
 	}
 
 	@Override

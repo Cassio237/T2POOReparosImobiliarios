@@ -32,7 +32,7 @@ public class Sistema {
 	public void listarClientes() {
 		try {
 			for (Cliente cliente : clientes) {
-				System.out.println("ID: " + cliente.getId() + "Nome: " + cliente.getNome() + " " + cliente.getDado()
+				System.out.println("ID: " + cliente.getId() + " Nome: " + cliente.getNome() + " " + cliente.getDado()
 						+ " Endereco: " + cliente.getEndereco() + " Telefone: " + cliente.getTelefone());
 			}
 		} catch (Exception e) {
@@ -157,6 +157,22 @@ public class Sistema {
 			System.out.println("sistema.pegaOrcamento" + e);
 		}
 		return null;
+	}
+	
+	public void listaOrcamentoDetalhado(int idOrcamento) {
+		try {
+			Orcamento orcamentoEspecifico = pegaOrcamento(idOrcamento);
+			for(Orcamento orcamento : orcamentos) {
+				if(orcamentoEspecifico.getId() == idOrcamento) {
+					System.out.printf("ID: %d - Cliente: %s - Endereço Imovel: %s - Valor: R$ %.2f - Aprovado: %s\n", orcamento.getId(),
+							orcamento.getCliente().getNome(), orcamento.getImovel().getEndereco(), orcamento.getValorOrcamento(), orcamento.isAprovado());
+					orcamento.listaServico();
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("sistema.listarOrcamento" + e);
+		}
+		
 	}
 	
 	public void addServicoOrcamento(int idPrestador, Double valor, String tipoServico) {
