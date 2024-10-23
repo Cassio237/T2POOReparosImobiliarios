@@ -183,7 +183,7 @@ public class Sistema {
 	public void addItensOrcamento(String tipoServico, String nome, int quantidade, Double valor) {
 		try {
 			ultiOrcamento.addMateriaisServico(tipoServico, nome, quantidade, valor);
-			System.out.println("Adicionado!! Listando intens orçamento:");
+			System.out.println("Adicionado!! Listando itens orçamento:");
 			ultiOrcamento.listaServico();
 			System.out.println("Adicionado!");
 		} catch (Exception e) {
@@ -195,10 +195,19 @@ public class Sistema {
 		try {
 			Orcamento orcamento = pegaOrcamento(idOrcamento);
 			orcamento.addMateriaisServico(tipoServico, nome, quantidade, valor);
-			System.out.println("Adicionado!! Listando intens orcamento:");
+			System.out.println("Adicionado!! Listando itens orcamento:");
 			orcamento.listaServico();
 		} catch (Exception e) {
 			System.out.println("sistema.addItensOrcamento por ID " + e);
+		}
+	}
+	
+	public void listaMaterial(int idOrcamento) {
+		try {
+			Orcamento orcamento = pegaOrcamento(idOrcamento);
+			orcamento.listaServico();
+		} catch (Exception e) {
+			System.out.println("sistema.listaMaterial " + e);
 		}
 	}
 	

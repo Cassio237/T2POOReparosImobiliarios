@@ -72,6 +72,7 @@ public class Orcamento {
 	public void listaServico() {
 		try {
 			for(Servico servico : servicos) {
+				System.out.println("===========Serviços===========");
 				System.out.printf("ID: %d Seviço: %s - Prestador: %s - Valor: R$ %.2f\n",servico.getId(), servico.getTipo(), servico.getPrestador().getNome(),
 						servico.getValorServico());
 				if(servico.isTemMateriais()) {
