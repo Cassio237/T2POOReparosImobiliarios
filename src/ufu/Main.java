@@ -20,11 +20,13 @@ public class Main {
 			int opcaoMenu = 0;
 			switch (opcao) {
 			case 1:
+				System.out.println();
 				System.out.println("1 - Cadastrar Cliente Pessoa Fisica");
-				System.out.println("1 - Cadastrar Cliente Pessoa Juridica");
+				System.out.println("2 - Cadastrar Cliente Pessoa Juridica");
 				System.out.println("3 - Lista Clientes");
 				System.out.println("0 - Voltar");
 				opcaoMenu = lerInt();
+				System.out.println();
 				switch (opcaoMenu) {
 				case 1:
 					cadastraClienteFisica();
@@ -44,10 +46,12 @@ public class Main {
 				}
 				break;
 			case 2:
+				System.out.println();
 				System.out.println("1 - Cadastrar Imoveis");
 				System.out.println("2 - Listar Imoveis");
 				System.out.println("0 - Voltar");
 				opcaoMenu = lerInt();
+				System.out.println();
 				switch (opcaoMenu) {
 				case 1:
 					cadastraImovel();
@@ -64,10 +68,12 @@ public class Main {
 				}
 				break;
 			case 3:
+				System.out.println();
 				System.out.println("1 - Cadastrar Prestador");
 				System.out.println("2 - Listar Prestadores");
 				System.out.println("0 - Voltar");
 				opcaoMenu = lerInt();
+				System.out.println();
 				switch (opcaoMenu) {
 				case 1:
 					cadastraPrestador();
@@ -84,6 +90,7 @@ public class Main {
 				}
 				break;
 			case 4:
+				System.out.println();
 				System.out.println("1 - Fazer Orçamento");
 				System.out.println("2 - Listar Orçamento");
 				System.out.println("3 - Listar Orçamento Detalhado");
@@ -91,6 +98,7 @@ public class Main {
 				System.out.println("5 - Aprovar Orçamento");
 				System.out.println("0 - Voltar");
 				opcaoMenu = lerInt();
+				System.out.println();
 				switch (opcaoMenu) {
 				case 1:
 					fazerOrcamento();
@@ -116,9 +124,11 @@ public class Main {
 				}
 				break;
 			case 5:
+				System.out.println();
 				System.out.println("1 - Listar Orcamentos Aprovados");
 				System.out.println("0 - Voltar");
 				opcaoMenu = lerInt();
+				System.out.println();
 				switch (opcaoMenu) {
 				case 1:
 					sistema.listarFinancas();
@@ -156,6 +166,7 @@ public class Main {
 		sistema.listaOrcamento();
 		System.out.println("Digite o ID do orcamento a ser detalhado abaixo");
 		int idOrcamento = lerInt();
+		System.out.println();
 		
 		sistema.listaOrcamentoDetalhado(idOrcamento);
 	}
@@ -163,17 +174,20 @@ public class Main {
 	public static void continuarOrcamento() {
 		System.out.println("*** Lista de Orcamentos para auxiliar***");
 		sistema.listaOrcamento();
+		System.out.println();
 		int opcaoOrcamento = 0;
 		System.out.println("Deseja adicionar serviços e/ou produtos ao orçamento?");
 		System.out.println("1 - Adicionar Serviços");
 		System.out.println("2 - Adicionar Produtos ao Serviços");
 		opcaoOrcamento = lerInt();
+		System.out.println();
 		switch (opcaoOrcamento) {
 		case 1:
 			System.out.println("Digite o ID do orcamento a ter serviço adicionado");
 			int idOrcamento = lerInt();
 			System.out.println("***Lista de Prestadores para auxiliar***");
 			sistema.listarPrestador();
+			System.out.println();
 			System.out.println("Digite o id do prestador abaixo (Precisa ser um id valido!)");
 			int idPrestador = lerInt();
 			System.out.println("Digite o valor do serviço abaixo");
@@ -183,10 +197,12 @@ public class Main {
 			
 			sistema.addServicoOrcamento(idOrcamento, idPrestador, valorServico, tipoServico);
 			
+			System.out.println();
 			int opcaoMaterial = 0;
 			System.out.println("Deseja adicionar materiais a esse serviço?");
 			System.out.println("Digite 1 para SIM ou outro valor para NÃO");
 			opcaoMaterial = lerInt();
+			System.out.println();
 			while (opcaoMaterial == 1) {
 				System.out.println("Digite o nome do produto abaixo");
 				String nomeMaterial = lerString();
@@ -197,9 +213,11 @@ public class Main {
 				
 				sistema.addItensOrcamento(idOrcamento, tipoServico, nomeMaterial, quantidadeMaterial, valorMaterial);
 				
+				System.out.println();
 				System.out.println("Adicionar mais materiais ao serviços?");
 				System.out.println("Digite 1 para SIM ou outro valor para NÃO");
 				opcaoMaterial = lerInt();
+				System.out.println();
 			}
 			System.out.println("Servico adicionado!");
 			break;
@@ -208,7 +226,8 @@ public class Main {
 			int idOrcamentoMaterial = lerInt();
 			System.out.println("Lista de Servicos para auxiliar");
 			sistema.listaMaterial(idOrcamentoMaterial);
-			System.out.println("Digite o serviço que tra material adicionado abaixo (Precisa já existir serviço)");
+			System.out.println();
+			System.out.println("Digite o serviço que terá material adicionado abaixo (Precisa já existir serviço)");
 			String tipoServicoMaterial = lerString();
 			System.out.println("Digite o nome do material abaixo");
 			String nomeMaterial = lerString();
@@ -228,12 +247,15 @@ public class Main {
 	public static void fazerOrcamento() {
 		System.out.println("***Lista de imoveis para auxiliar***");
 		sistema.listarImovel();
+		System.out.println();
 		System.out.println("Digite o ID do imovel abaixo");
 		int idImovel = lerInt();
 		System.out.println("***Lista de nome dos cliente para auxiliar***");
 		sistema.listarClientes();
+		System.out.println();
 		System.out.println("Digite o nome do responsavel pelo orcamento (Precisa já estar cadastrado)");
 		String clienteNome = lerString();
+		System.out.println();
 		
 		sistema.iniciarOrcamento(idImovel, clienteNome);
 		
@@ -241,15 +263,18 @@ public class Main {
 		System.out.println("Deseja adicionar serviços ao orçamento?");
 		System.out.println("Digite 1 para SIM ou outro valor para NÃO");
 		opcaoServico = lerInt();
+		System.out.println();
 		while (opcaoServico == 1) {
 			System.out.println("***Lista de Prestadores para auxiliar***");
 			sistema.listarPrestador();
+			System.out.println();
 			System.out.println("Digite o id do prestador abaixo (Precisa ser um id valido!)");
 			int idPrestador = lerInt();
 			System.out.println("Digite o valor do serviço abaixo");
 			Double valorServico = lerDouble();
 			System.out.println("Digite o tipo de serviço abaixo");
 			String tipoServico = lerString();
+			System.out.println();
 			
 			sistema.addServicoOrcamento(idPrestador, valorServico, tipoServico);
 			
@@ -257,6 +282,7 @@ public class Main {
 			System.out.println("Deseja adicionar materiais a esse serviço?");
 			System.out.println("Digite 1 para SIM ou outro valor para NÃO");
 			opcaoMaterial = lerInt();
+			System.out.println();
 			while (opcaoMaterial == 1) {
 				System.out.println("Digite o nome do produto abaixo");
 				String nomeMaterial = lerString();
@@ -267,18 +293,22 @@ public class Main {
 				
 				sistema.addItensOrcamento(tipoServico, nomeMaterial, quantidadeMaterial, valorMaterial);
 				
+				System.out.println();
 				System.out.println("Adicionar mais materiais ao serviços?");
 				System.out.println("Digite 1 para SIM ou outro valor para NÃO");
 				opcaoMaterial = lerInt();
+				System.out.println();
 			}
 			
 			System.out.println("Adicionar mais serviços?");
 			System.out.println("Digite 1 para SIM ou outro valor para NÃO");
 			opcaoServico = lerInt();
+			System.out.println();
 		}
 		System.out.println("Cliente deseja aprovar orcamento?");
 		System.out.println("Digite 1 para SIM ou outro valor para NÃO");
 		int aprova = lerInt();
+		System.out.println();
 		if(aprova == 1) {
 			sistema.aprovarOrcamento(true);
 		}
@@ -338,6 +368,7 @@ public class Main {
 		System.out.println("4 - Orçamentos");
 		System.out.println("5 - Financeiro");
 		System.out.println("0 - Encerrar programa");
+		System.out.println();
 	}
 	
 	public static double lerDouble() {

@@ -161,9 +161,8 @@ public class Sistema {
 	
 	public void listaOrcamentoDetalhado(int idOrcamento) {
 		try {
-			Orcamento orcamentoEspecifico = pegaOrcamento(idOrcamento);
 			for(Orcamento orcamento : orcamentos) {
-				if(orcamentoEspecifico.getId() == idOrcamento) {
+				if(orcamento.getId() == idOrcamento) {
 					System.out.printf("ID: %d - Cliente: %s - Endereço Imovel: %s - Valor: R$ %.2f - Aprovado: %s\n", orcamento.getId(),
 							orcamento.getCliente().getNome(), orcamento.getImovel().getEndereco(), orcamento.getValorOrcamento(), orcamento.isAprovado());
 					orcamento.listaServico();
