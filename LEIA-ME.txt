@@ -3,6 +3,8 @@ Guilherme Aparecido de Assis Alves 14211BSI330
 Wellington dos Reis Ferreira 12111BSI286
 (Linha 12)
 
+Arquivos estao dentro do src/ufu.
+
 O modelo foi escolhido pelo grupo e segue uma logica de criar orcamentos para reparo imobiliarios, serao feito orçamentos simples que poderao ter servicos e materiais, os Orcamento tem imoveis que tem proprietarios que podem ser ou nao responsaveis pelo orçameto
 
 Classe total 12 sendo 7 para a logica do negocio
