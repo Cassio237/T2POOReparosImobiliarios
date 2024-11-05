@@ -1,3 +1,15 @@
+//Parte 3
+
+1. OrcamentoException {  // metodo sistema.aprovarOrçamento será alterado
+	Um orcamento sem serviço e sem valores nao será aprovado
+	}
+
+Criar view de Main, adicionar cliente, listar cliente, adicionar imoveis, listar imoveis, adicionar e listar prestador, criar orcamentos, financeiro;
+
+nos metodos necessarios mudar exception e adicionar o JOptionPane
+
+
+//Parte 2
 1. Abstract Cliente (int id; String nome, endereço, telefone;)
 	1.1. Pessoa Jurídica (String cnpj)
 	1.2. Pessoa Física (String cpf)
