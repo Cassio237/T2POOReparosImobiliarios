@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import MinhasExcecoes.OrcamentoException;
+
 public class Sistema {
 	ArrayList<Cliente> clientes = new ArrayList<>();
 	ArrayList<Prestador> prestadores = new ArrayList<>();
@@ -27,6 +29,38 @@ public class Sistema {
 	
 	public Orcamento ultiOrcamento;
 	
+	public void iniciaDados() { //inicializador que carrega dados existentes
+	    ArrayList<Cliente> clientesLidos = ler(arquivoCliente);
+	    if (clientesLidos != null) {
+	        clientes = clientesLidos;
+	    }
+
+	    ArrayList<Prestador> prestadoresLidos = ler(arquivoPrestador);
+	    if (prestadoresLidos != null) {
+	        prestadores = prestadoresLidos;
+	    }
+
+	    ArrayList<Imovel> imoveisLidos = ler(arquivoImovel);
+	    if (imoveisLidos != null) {
+	        imoveis = imoveisLidos;
+	    }
+
+	    ArrayList<Orcamento> orcamentosLidos = ler(arquivoOrcamento);
+	    if (orcamentosLidos != null) {
+	        orcamentos = orcamentosLidos;
+	    }
+	    
+	    Orcamento orcamento = new Orcamento();
+	    orcamento.iniciaDadosServico();
+	    Servico servico = new Servico();
+	    servico.iniciaDadosMaterias();
+
+	    ArrayList<Financeiro> financasLidas = ler(arquivoFinanca);
+	    if (financasLidas != null) {
+	        financas = financasLidas;
+	    }
+	}
+	
 	public <E> ArrayList<E> ler(String caminho) { // uso o tipo generic <E> para todos arrays, vou reutilizar o metodo
 		FileInputStream leitor = null;
 		ObjectInputStream object = null;
@@ -41,14 +75,14 @@ public class Sistema {
 		} catch (EOFException e) { // uso do EOFException
 			try {
 				leitor.close();
-				JOptionPane.showMessageDialog(null, "Sistema.ler impossivel ler arquivo, dados incompletos" + e);
+				JOptionPane.showMessageDialog(null, "Sistema.ler impossivel ler arquivo, dados incompletos" + e.getMessage());
 			} catch (IOException e2) { // uso do IOException
-				JOptionPane.showConfirmDialog(null, "Sistema.ler impossivel ler arquivo, dados incompletos" + e2);
+				JOptionPane.showConfirmDialog(null, "Sistema.ler impossivel ler arquivo, dados incompletos" + e2.getMessage());
 			}
 		} catch (FileNotFoundException e) {
-		    JOptionPane.showMessageDialog(null, "Sistema.ler erro de leitura, arquivo de " + caminho + " não encontrado" + e);
+		    JOptionPane.showMessageDialog(null, "Sistema.ler erro de leitura, arquivo de " + caminho + " não encontrado" + e.getMessage());
 		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(null, "Sistema.ler erro de leitura, consulte o suporte" + e2);
+			JOptionPane.showMessageDialog(null, "Sistema.ler erro de leitura, consulte o suporte" + e2.getMessage());
 		} finally {
 			try {
 				if (leitor != null)
@@ -88,8 +122,10 @@ public class Sistema {
 			clientes.add(new PessoaFisica(nome, endereco, telefone, cpf));
 			escreve(arquivoCliente, clientes);
 			System.out.println("Adicionado!");
+			JOptionPane.showMessageDialog(null, "Adicionado!");
 		} catch (Exception e) {
 			System.out.println("Sistema.CLienteFisica" + e);
+			JOptionPane.showMessageDialog(null, "Sistema.ClienteFisica " + e);
 		}
 	}
 
@@ -98,8 +134,10 @@ public class Sistema {
 			clientes.add(new PessoaJuridica(nome, endereco, telefone, cnpj));
 			escreve(arquivoCliente, clientes);
 			System.out.println("Adicionado!");
+			JOptionPane.showMessageDialog(null, "Adicionado!");
 		} catch (Exception e) {
 			System.out.println("Sistema.CLienteJuridica" + e);
+			JOptionPane.showMessageDialog(null, "Sistema.CLienteJuridica " + e);
 		}
 	}
 
@@ -111,6 +149,7 @@ public class Sistema {
 			}
 		} catch (Exception e) {
 			System.out.println("Sistema.ListarCliente" + e);
+			JOptionPane.showMessageDialog(null, "sistema.ListarCliente" + e);
 		}
 	}
 
@@ -119,8 +158,10 @@ public class Sistema {
 			prestadores.add(new Prestador(nome, funcao));
 			escreve(arquivoPrestador, prestadores);;
 			System.out.println("Adicionado!");
+			JOptionPane.showMessageDialog(null, "Adicionado!");
 		} catch (Exception e) {
 			System.out.println("sistema.criarPrestador" + e);
+			JOptionPane.showMessageDialog(null, "sistema.criarPrestador" + e);
 		}
 	}
 	
@@ -131,6 +172,7 @@ public class Sistema {
 			}
 		} catch (Exception e) {
 			System.out.println("sistema.listarPrestador" + e);
+			JOptionPane.showMessageDialog(null, "sistema.listarPrestador" + e);
 		}
 	}
 	
@@ -143,6 +185,7 @@ public class Sistema {
 			}
 		} catch (Exception e) {
 			System.out.println("sistema.pegaPrestador" + e);
+			JOptionPane.showMessageDialog(null, "sistema.pegaPrestador" + e);
 		}
 		return null;
 	}
@@ -156,6 +199,7 @@ public class Sistema {
 			}
 		} catch (Exception e) {
 			System.out.println("Sitema.pegaCliente" + e);
+			JOptionPane.showMessageDialog(null, "Sitema.pegaCliente" + e);
 		}
 		return null;
 	}
@@ -170,8 +214,10 @@ public class Sistema {
 			imoveis.add(new Imovel(endereco, cliente));
 			escreve(arquivoImovel, imoveis);
 			System.out.println("Adicionado!");
+			JOptionPane.showMessageDialog(null, "Adicionado!");
 		} catch (Exception e) {
 			System.out.println("sistema.criarImovel" + e);
+			JOptionPane.showMessageDialog(null, "sistema.criarImovel" + e);
 		}
 	}
 	
@@ -183,6 +229,7 @@ public class Sistema {
 			}
 		} catch (Exception e) {
 			System.out.println("sistema.listarImovel" + e);
+			JOptionPane.showMessageDialog(null, "sistema.listarImovel" + e);
 		}
 	}
 	
@@ -195,6 +242,7 @@ public class Sistema {
 			}
 		} catch (Exception e) {
 			System.out.println("sistema.pegaImovel" + e);
+			JOptionPane.showMessageDialog(null, "sistema.pegaImovel" + e);
 		}
 		return null;
 	}
@@ -205,8 +253,10 @@ public class Sistema {
 			Cliente cliente = pegaCliente(clienteNome);
 			ultiOrcamento = new Orcamento(imovel, cliente); //crio uma "copia" do orcamento que esta sendo feito
 			orcamentos.add(ultiOrcamento);
+			escreve(arquivoOrcamento, orcamentos);
 		} catch (Exception e) {
 			System.out.println("sistema.iniciarOrcamento" + e);
+			JOptionPane.showMessageDialog(null, "sistema.iniciarOrcamento" + e);
 		}
 	}
 	
@@ -218,6 +268,7 @@ public class Sistema {
 			}
 		} catch (Exception e) {
 			System.out.println("sistema.listarOrcamento" + e);
+			JOptionPane.showMessageDialog(null, "sistema.listarOrcamento" + e);
 		}
 		
 	}
@@ -231,6 +282,7 @@ public class Sistema {
 			}
 		} catch (Exception e) {
 			System.out.println("sistema.pegaOrcamento" + e);
+			JOptionPane.showMessageDialog(null, "sistema.pegaOrcamento" + e);
 		}
 		return null;
 	}
@@ -246,6 +298,7 @@ public class Sistema {
 			}
 		} catch (Exception e) {
 			System.out.println("sistema.listarOrcamento" + e);
+			JOptionPane.showMessageDialog(null, "sistema.listarOrcamento" + e);
 		}
 		
 	}
@@ -255,8 +308,10 @@ public class Sistema {
 			Prestador prestador = pegaPrestador(idPrestador);
 			ultiOrcamento.criarServico(prestador, valor, tipoServico);
 			System.out.println("Adicionado!");
+			JOptionPane.showMessageDialog(null, "Adicionado!");
 		} catch (Exception e) {
 			System.out.println("sistema.addServicoOrcamento - ultimo" + e);
+			JOptionPane.showMessageDialog(null, "sistema.addServicoOrcamento - ultimo" + e);
 		}
 	}
 	
@@ -266,8 +321,10 @@ public class Sistema {
 			Prestador prestador = pegaPrestador(idPrestador);
 			orcamento.criarServico(prestador, valor, tipoServico);
 			System.out.println("Adicionado!");
+			JOptionPane.showMessageDialog(null, "Adicionado!");
 		} catch (Exception e) {
 			System.out.println("sistema.addServicoOrcamento - por ID " + e);
+			JOptionPane.showMessageDialog(null, "sistema.addServicoOrcamento - por ID " + e);
 		}
 	}
 	
@@ -277,8 +334,10 @@ public class Sistema {
 			System.out.println("Adicionado!! Listando itens orçamento:");
 			ultiOrcamento.listaServico();
 			System.out.println("Adicionado!");
+			JOptionPane.showMessageDialog(null, "Adicionado!");
 		} catch (Exception e) {
 			System.out.println("sistema.addItensOrcamento ultimo " + e);
+			JOptionPane.showMessageDialog(null, "sistema.addItensOrcamento ultimo " + e);
 		}
 	}
 	
@@ -287,9 +346,11 @@ public class Sistema {
 			Orcamento orcamento = pegaOrcamento(idOrcamento);
 			orcamento.addMateriaisServico(tipoServico, nome, quantidade, valor);
 			System.out.println("Adicionado!! Listando itens orcamento:");
+			JOptionPane.showMessageDialog(null, "Adicionado!");
 			orcamento.listaServico();
 		} catch (Exception e) {
 			System.out.println("sistema.addItensOrcamento por ID " + e);
+			JOptionPane.showMessageDialog(null, "sistema.addItensOrcamento por ID " + e);
 		}
 	}
 	
@@ -299,23 +360,42 @@ public class Sistema {
 			orcamento.listaServico();
 		} catch (Exception e) {
 			System.out.println("sistema.listaMaterial " + e);
+			JOptionPane.showMessageDialog(null, "sistema.listaMaterial " + e);
 		}
 	}
 	
 	public void aprovarOrcamento(boolean pago) { // finalizar e aprovar ultimo orcamento
 		try {
+			if(ultiOrcamento.servicos == null || ultiOrcamento.servicos.isEmpty()) {
+				throw new OrcamentoException("Nao tem serviços nesse orçamento, impossivel aprovar");
+			}
 			financas.add(new Financeiro(ultiOrcamento, pago, ultiOrcamento.getCliente(), ultiOrcamento.getValorOrcamento()));
+			escreve(arquivoFinanca, financas);
+			JOptionPane.showMessageDialog(null, "Aprovado!");
+		} catch (OrcamentoException oe){
+			System.out.println("sistema.aprovarOrcamento ultimo" + oe);
+			JOptionPane.showMessageDialog(null, "sistema.aprovarOrcamento ultimo" + oe);
 		} catch (Exception e) {
 			System.out.println("sistema.aprovarOrcamento ultimo" + e);
+			JOptionPane.showMessageDialog(null, "sistema.aprovarOrcamento ultimo" + e);
 		}
 	}
 	
 	public void aprovarOrcamento(int idOrcamento, boolean pago) { // com sobrecarga buscar e aprovar outro orcamento
 		try {
 			Orcamento orcamento = pegaOrcamento(idOrcamento);
+			if(orcamento.servicos == null || orcamento.servicos.isEmpty()) {
+				throw new OrcamentoException("Nao tem serviços nesse orçamento, impossivel aprovar");
+			}
 			financas.add(new Financeiro(orcamento, pago, orcamento.getCliente(), orcamento.getValorOrcamento()));
+			escreve(arquivoFinanca, financas);
+			JOptionPane.showMessageDialog(null, "Aprovado!");
+		} catch (OrcamentoException oe) {
+			System.out.println("sistema.aprovarOrcamento ID" + oe);
+			JOptionPane.showMessageDialog(null, "sistema.aprovarOrcamento ID" + oe);
 		} catch (Exception e) {
 			System.out.println("sistema.aprovarOrcamento ID" + e);
+			JOptionPane.showMessageDialog(null, "sistema.aprovarOrcamento ID" + e);
 		}	
 	}
 	
@@ -327,6 +407,7 @@ public class Sistema {
 			}
 		} catch (Exception e) {
 			System.out.println("sistema.listaFinancas" + e);
+			JOptionPane.showMessageDialog(null, "sistema.listaFinancas " + e);
 		}
 
 	}

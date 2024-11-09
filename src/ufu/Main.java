@@ -8,10 +8,11 @@ public class Main {
 	
 
 	public static void main(String[] args) {	
-		autoCliente();
-		autoPrestador();
-		autoImovel();
-		autoOrcamento();
+		//autoCliente();
+		//autoPrestador();
+		//autoImovel();
+		//autoOrcamento();
+		sistema.iniciaDados();
 		
 		int opcao = 0;
 		do {

@@ -1,9 +1,12 @@
 package ufu;
 
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,6 +28,8 @@ public class Servico implements Material, Reparo, Serializable{
 	
 	private String arquivoMaterial = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Materiais";
 	
+	public Servico() {} //Contrutor so para chame um metodo q inicia dados
+	
 	public Servico(Prestador prestador, Double valor, String tipo) {
 		this.prestador = prestador;
 		this.valorServico = valor;
@@ -33,6 +38,46 @@ public class Servico implements Material, Reparo, Serializable{
 		temMateriais = false;
 		comproMateriais = false;
 		this.id = contador++;
+	}
+	
+	public void iniciaDadosMaterias() { //inicializador que carrega dados existentes
+	    ArrayList<Materiais> materiasLidos = ler(arquivoMaterial);
+	    if (materiasLidos != null) {
+	    	listaMateriais = materiasLidos;
+	    }
+	}
+	
+	public <E> ArrayList<E> ler(String caminho) { // uso o tipo generic <E> para todos arrays, vou reutilizar o metodo
+		FileInputStream leitor = null;
+		ObjectInputStream object = null;
+
+		try {
+			leitor = new FileInputStream(caminho);
+			object = new ObjectInputStream(leitor);
+
+			@SuppressWarnings("unchecked") // sei lá a IDE avisava aqui abaixo, isso faz um Casting Seguro **
+			ArrayList<E> lista = (ArrayList<E>) object.readObject();
+			return lista;
+		} catch (EOFException e) { // uso do EOFException
+			try {
+				leitor.close();
+				JOptionPane.showMessageDialog(null, "Sistema.ler impossivel ler arquivo, dados incompletos" + e);
+			} catch (IOException e2) { // uso do IOException
+				JOptionPane.showConfirmDialog(null, "Sistema.ler impossivel ler arquivo, dados incompletos" + e2);
+			}
+		} catch (FileNotFoundException e) {
+		    JOptionPane.showMessageDialog(null, "Sistema.ler erro de leitura, arquivo de " + caminho + " não encontrado" + e);
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(null, "Sistema.ler erro de leitura, consulte o suporte" + e2);
+		} finally {
+			try {
+				if (leitor != null)
+					leitor.close();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Sistema.ler Erro ao limpar buffer, consulte o suporte" + e);
+			}
+		}
+		return null;
 	}
 	
 	public <E> void escreve(String caminho, ArrayList<E> lista) { //Declaro tipo generico <E>
