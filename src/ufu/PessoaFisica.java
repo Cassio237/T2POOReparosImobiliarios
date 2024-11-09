@@ -1,8 +1,13 @@
 package ufu;
 
+
 import java.util.ArrayList;
 
-public class PessoaFisica extends Cliente {
+public class PessoaFisica extends Cliente{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String cpf;
 	private static ArrayList<String> CPFs = new ArrayList<String>(); // para usar no validador, static
 	

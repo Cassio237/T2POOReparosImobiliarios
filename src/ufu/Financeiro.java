@@ -1,8 +1,13 @@
 package ufu;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Financeiro {
+public class Financeiro implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int contador = 700;
 	private int id;
 	private Orcamento orcamento;

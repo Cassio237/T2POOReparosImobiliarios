@@ -1,6 +1,12 @@
 package ufu;
 
-public abstract class Cliente {
+import java.io.Serializable;
+
+public abstract class Cliente implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nome, endereco, telefone;
 	private int id;
 	private static int contador = 100;

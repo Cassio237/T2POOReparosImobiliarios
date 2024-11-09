@@ -1,8 +1,20 @@
 package ufu;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Orcamento {
+import javax.swing.JOptionPane;
+
+public class Orcamento implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int contador = 500;
 	private int id;
 	private Imovel imovel;
@@ -10,6 +22,8 @@ public class Orcamento {
 	private Cliente cliente;
 	private Double valorOrcamento;
 	private boolean aprovado;
+	
+	private String arquivoServico = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Serviço";
 	
 	public Orcamento(Imovel imovel, Cliente cliente) {
 		this.imovel = imovel;
@@ -19,12 +33,36 @@ public class Orcamento {
 		this.aprovado = false;
 	}
 	
+	public <E> void escreve(String caminho, ArrayList<E> lista) { //Declaro tipo generico <E>
+		FileOutputStream escritor = null;
+		ObjectOutputStream object = null;
+		try {
+			escritor = new FileOutputStream(caminho);
+			object = new ObjectOutputStream(escritor);
+			
+			object.writeObject(lista);
+		} catch (FileNotFoundException e) { //uso do NotFoundException
+			JOptionPane.showMessageDialog(null, "Sistema.escreve Arquivo não encontrador \n Dados não serao salvos" + e);
+		} catch (IOException e){ // uso do IOException
+			JOptionPane.showMessageDialog(null, "Sistema.escreve Erro de entrada de dados \n Dados não serao salvos" + e);
+		} finally {
+			try {
+				if (escritor != null) {
+					escritor.close();
+				}
+			} catch (Exception e2) {
+				JOptionPane.showMessageDialog(null, "Sistema.escreve Erro ao limpar buffer, consulte o suporte" + e2);
+			}
+		}
+	}
+	
 	public void criarServico(Prestador prestador, Double valor, String tipo) {
 		try {
 			if (prestador == null || valor == null || tipo == null) {
 				throw new IllegalArgumentException("Prestador, valor ou tipo de serviço errado, Tente Novamente!");
 			}
 			servicos.add(new Servico(prestador, valor, tipo));
+			escreve(arquivoServico, servicos);
 			valorOrcamento = valorOrcamento + valor;
 		} catch (Exception e) {
 			System.out.println("orcamento.criarServico" + e);

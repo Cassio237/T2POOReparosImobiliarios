@@ -4,6 +4,8 @@
 	Um orcamento sem serviço e sem valores nao será aprovado
 	}
 
+Uso de EOFException, IOException, FileNotFoundException,
+
 Criar view de Main, adicionar cliente, listar cliente, adicionar imoveis, listar imoveis, adicionar e listar prestador, criar orcamentos, financeiro;
 
 nos metodos necessarios mudar exception e adicionar o JOptionPane

@@ -1,6 +1,12 @@
 package ufu;
 
-public class Materiais {
+import java.io.Serializable;
+
+public class Materiais implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nome;
 	private int quantidade;
 	private Double valor,  valorTotal;

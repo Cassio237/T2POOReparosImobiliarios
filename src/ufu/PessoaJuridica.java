@@ -3,6 +3,10 @@ package ufu;
 import java.util.ArrayList;
 
 public class PessoaJuridica extends Cliente {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String cnpj;
 	private static ArrayList<String> CNPJs = new ArrayList<String>(); // para usar no validador, static
 

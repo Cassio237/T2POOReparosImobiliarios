@@ -1,6 +1,16 @@
 package ufu;
 
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 public class Sistema {
 	ArrayList<Cliente> clientes = new ArrayList<>();
@@ -9,11 +19,74 @@ public class Sistema {
 	ArrayList<Orcamento> orcamentos = new ArrayList<>();
 	ArrayList<Financeiro> financas = new ArrayList<>();
 	
+	String arquivoCliente = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Cliente";
+	String arquivoPrestador = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Prestador";
+	String arquivoImovel = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Imovel";
+	String arquivoOrcamento = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Orcamento";
+	String arquivoFinanca = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Financa";
+	
 	public Orcamento ultiOrcamento;
+	
+	public <E> ArrayList<E> ler(String caminho) { // uso o tipo generic <E> para todos arrays, vou reutilizar o metodo
+		FileInputStream leitor = null;
+		ObjectInputStream object = null;
+
+		try {
+			leitor = new FileInputStream(caminho);
+			object = new ObjectInputStream(leitor);
+
+			@SuppressWarnings("unchecked") // sei lá a IDE avisava aqui abaixo, isso faz um Casting Seguro **
+			ArrayList<E> lista = (ArrayList<E>) object.readObject();
+			return lista;
+		} catch (EOFException e) { // uso do EOFException
+			try {
+				leitor.close();
+				JOptionPane.showMessageDialog(null, "Sistema.ler impossivel ler arquivo, dados incompletos" + e);
+			} catch (IOException e2) { // uso do IOException
+				JOptionPane.showConfirmDialog(null, "Sistema.ler impossivel ler arquivo, dados incompletos" + e2);
+			}
+		} catch (FileNotFoundException e) {
+		    JOptionPane.showMessageDialog(null, "Sistema.ler erro de leitura, arquivo de " + caminho + " não encontrado" + e);
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(null, "Sistema.ler erro de leitura, consulte o suporte" + e2);
+		} finally {
+			try {
+				if (leitor != null)
+					leitor.close();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Sistema.ler Erro ao limpar buffer, consulte o suporte" + e);
+			}
+		}
+		return null;
+	}
+
+	public <E> void escreve(String caminho, ArrayList<E> lista) { //Declaro tipo generico <E>
+		FileOutputStream escritor = null;
+		ObjectOutputStream object = null;
+		try {
+			escritor = new FileOutputStream(caminho);
+			object = new ObjectOutputStream(escritor);
+			
+			object.writeObject(lista);
+		} catch (FileNotFoundException e) { //uso do NotFoundException
+			JOptionPane.showMessageDialog(null, "Sistema.escreve Arquivo não encontrador \n Dados não serao salvos" + e);
+		} catch (IOException e){ // uso do IOException
+			JOptionPane.showMessageDialog(null, "Sistema.escreve Erro de entrada de dados \n Dados não serao salvos" + e);
+		} finally {
+			try {
+				if (escritor != null) {
+					escritor.close();
+				}
+			} catch (Exception e2) {
+				JOptionPane.showMessageDialog(null, "Sistema.escreve Erro ao limpar buffer, consulte o suporte" + e2);
+			}
+		}
+	}
 
 	public void criarClienteFisica(String nome, String endereco, String telefone, String cpf) {
 		try {
 			clientes.add(new PessoaFisica(nome, endereco, telefone, cpf));
+			escreve(arquivoCliente, clientes);
 			System.out.println("Adicionado!");
 		} catch (Exception e) {
 			System.out.println("Sistema.CLienteFisica" + e);
@@ -23,6 +96,7 @@ public class Sistema {
 	public void criarClienteJuridica(String nome, String endereco, String telefone, String cnpj) {
 		try {
 			clientes.add(new PessoaJuridica(nome, endereco, telefone, cnpj));
+			escreve(arquivoCliente, clientes);
 			System.out.println("Adicionado!");
 		} catch (Exception e) {
 			System.out.println("Sistema.CLienteJuridica" + e);
@@ -43,6 +117,7 @@ public class Sistema {
 	public void criarPrestador(String nome, String funcao) {
 		try {
 			prestadores.add(new Prestador(nome, funcao));
+			escreve(arquivoPrestador, prestadores);;
 			System.out.println("Adicionado!");
 		} catch (Exception e) {
 			System.out.println("sistema.criarPrestador" + e);
@@ -93,6 +168,7 @@ public class Sistema {
 				return;
 			}
 			imoveis.add(new Imovel(endereco, cliente));
+			escreve(arquivoImovel, imoveis);
 			System.out.println("Adicionado!");
 		} catch (Exception e) {
 			System.out.println("sistema.criarImovel" + e);
