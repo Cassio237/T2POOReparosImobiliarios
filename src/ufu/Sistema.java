@@ -21,6 +21,26 @@ public class Sistema {
 	ArrayList<Orcamento> orcamentos = new ArrayList<>();
 	ArrayList<Financeiro> financas = new ArrayList<>();
 	
+	public ArrayList<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public ArrayList<Prestador> getPrestadores() {
+		return prestadores;
+	}
+
+	public ArrayList<Imovel> getImoveis() {
+		return imoveis;
+	}
+
+	public ArrayList<Orcamento> getOrcamentos() {
+		return orcamentos;
+	}
+
+	public ArrayList<Financeiro> getFinancas() {
+		return financas;
+	}
+
 	String arquivoCliente = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Cliente";
 	String arquivoPrestador = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Prestador";
 	String arquivoImovel = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Imovel";
@@ -29,36 +49,42 @@ public class Sistema {
 	
 	public Orcamento ultiOrcamento;
 	
-	public void iniciaDados() { //inicializador que carrega dados existentes
-	    ArrayList<Cliente> clientesLidos = ler(arquivoCliente);
-	    if (clientesLidos != null) {
-	        clientes = clientesLidos;
-	    }
+	public void iniciaDados(){ //inicializador que carrega dados existentes
+		try {
+			ArrayList<Cliente> clientesLidos = ler(arquivoCliente);
+		    if (clientesLidos != null) {
+		        clientes = clientesLidos;
+		    }
 
-	    ArrayList<Prestador> prestadoresLidos = ler(arquivoPrestador);
-	    if (prestadoresLidos != null) {
-	        prestadores = prestadoresLidos;
-	    }
+		    ArrayList<Prestador> prestadoresLidos = ler(arquivoPrestador);
+		    if (prestadoresLidos != null) {
+		        prestadores = prestadoresLidos;
+		    }
 
-	    ArrayList<Imovel> imoveisLidos = ler(arquivoImovel);
-	    if (imoveisLidos != null) {
-	        imoveis = imoveisLidos;
-	    }
+		    ArrayList<Imovel> imoveisLidos = ler(arquivoImovel);
+		    if (imoveisLidos != null) {
+		        imoveis = imoveisLidos;
+		    }
 
-	    ArrayList<Orcamento> orcamentosLidos = ler(arquivoOrcamento);
-	    if (orcamentosLidos != null) {
-	        orcamentos = orcamentosLidos;
-	    }
-	    
-	    Orcamento orcamento = new Orcamento();
-	    orcamento.iniciaDadosServico();
-	    Servico servico = new Servico();
-	    servico.iniciaDadosMaterias();
-
-	    ArrayList<Financeiro> financasLidas = ler(arquivoFinanca);
-	    if (financasLidas != null) {
-	        financas = financasLidas;
-	    }
+		    ArrayList<Orcamento> orcamentosLidos = ler(arquivoOrcamento);
+		    if (orcamentosLidos != null) {
+		        orcamentos = orcamentosLidos;
+		    }
+		    
+		    Orcamento orcamento = new Orcamento();
+		    orcamento.iniciaDadosServico();
+		    Servico servico = new Servico();
+		    servico.iniciaDadosMaterias();
+		    
+		    ArrayList<Financeiro> financasLidas = ler(arquivoFinanca);
+		    if (financasLidas != null) {
+		        financas = financasLidas;
+		    }
+		} catch (Exception e2) {
+			System.exit(-1); //fecha se nao carregar os dados
+			System.out.println("sistema.iniciaDados " + e2);
+			JOptionPane.showMessageDialog(null, "sistema.iniciaDados Dados nao carregados! Reinicie a aplicação" + e2);
+		}
 	}
 	
 	public <E> ArrayList<E> ler(String caminho) { // uso o tipo generic <E> para todos arrays, vou reutilizar o metodo
@@ -402,14 +428,15 @@ public class Sistema {
 	public void listarFinancas() {
 		try {
 			for(Financeiro financa : financas) {
-				System.out.printf("ID: %d - Cliente: %s - Endereco: %s - Valor: RS %.2f Data: %s - Pago: %s\n", financa.getId(), financa.getResponsavel().getNome(),
-						financa.getOrcamento().getImovel().getEndereco(), financa.getValor(), financa.getData(), financa.getPago());
+				
+				System.out.printf("ID: %d - Cliente: %s - Endereco: %s - Valor: RS %.2f Data: %s - Pago: %s\n", financa.getId(), 
+						financa.getResponsavel().getNome(),financa.getOrcamento().getImovel().getEndereco(), financa.getValor(), 
+						financa.getData(), financa.getPago());
 			}
 		} catch (Exception e) {
 			System.out.println("sistema.listaFinancas" + e);
 			JOptionPane.showMessageDialog(null, "sistema.listaFinancas " + e);
 		}
-
 	}
-
+	
 }

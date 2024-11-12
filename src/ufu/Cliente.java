@@ -49,6 +49,6 @@ public abstract class Cliente implements Serializable{
 	
 	abstract boolean validar(String valor); 
 	
-	abstract String getDado(); //Metodo abstrato nao para obrigar e sim para facilitar o acesso a um atributo da classe filha
+	public abstract String getDado(); //Metodo abstrato nao para obrigar e sim para facilitar o acesso a um atributo da classe filha
 
 }

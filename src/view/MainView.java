@@ -12,12 +12,16 @@ import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
+	private static Sistema sistema = new Sistema();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -38,6 +42,7 @@ public class MainView extends JFrame {
 	 * Create the frame.
 	 */
 	public MainView() {
+		sistema.iniciaDados();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -62,19 +67,38 @@ public class MainView extends JFrame {
 		contentPane.add(btnAddCliente);
 		
 		JButton btnListCliente = new JButton("Listar Clientes");
+		btnListCliente.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        listaClientesView view = new listaClientesView();
+		        view.setVisible(true);
+		    }
+		});
 		contentPane.add(btnListCliente);
 		
 		JButton btnAddImovel = new JButton("Adicionar Imovel");
 		contentPane.add(btnAddImovel);
 		
-		JButton btnLstImovel = new JButton("Listar Imoveis");
-		contentPane.add(btnLstImovel);
+		JButton btnListImovel = new JButton("Listar Imoveis");
+		btnListImovel.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        listaImoveisView view = new listaImoveisView();
+		        view.setVisible(true);
+		    }
+		});
+		contentPane.add(btnListImovel);
 		
 		JButton btnAddPrestador = new JButton("Adicionar Prestador");
 		contentPane.add(btnAddPrestador);
 		
-		JButton btnLstPrestador = new JButton("Listar Prestadores");
-		contentPane.add(btnLstPrestador);
+		JButton btnListPrestador = new JButton("Listar Prestadores");
+		btnListPrestador.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        listaPrestadoresView view = new listaPrestadoresView();
+		        view.setVisible(true);
+		    }
+		});
+		contentPane.add(btnListPrestador);
+		
 		
 		JButton btnCriarOrcamento = new JButton("Criar Orçamento");
 		contentPane.add(btnCriarOrcamento);
