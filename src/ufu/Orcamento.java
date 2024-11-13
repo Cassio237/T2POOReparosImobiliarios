@@ -18,13 +18,13 @@ public class Orcamento implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static int contador = 500;
-	private int id;
 	private Imovel imovel;
 	protected ArrayList<Servico> servicos = new ArrayList<Servico>();
 	private Cliente cliente;
 	private Double valorOrcamento;
 	private boolean aprovado;
+	protected int id;
+	private int contador;
 	
 	private String arquivoServico = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Serviço";
 	
@@ -34,8 +34,8 @@ public class Orcamento implements Serializable{
 		this.imovel = imovel;
 		this.cliente = cliente;
 		this.valorOrcamento = 0.0;
-		this.id = contador++;
 		this.aprovado = false;
+		this.id = contador++;
 	}
 	
 	public void iniciaDadosServico() { //inicializador que carrega dados existentes
@@ -185,10 +185,6 @@ public class Orcamento implements Serializable{
 		this.cliente = cliente;
 	}
 
-	public int getId() {
-		return id;
-	}
-
 	public Double getValorOrcamento() {
 		return valorOrcamento;
 	}
@@ -209,5 +205,11 @@ public class Orcamento implements Serializable{
 		return pegaServico(tipo);
 	}
 
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
 }

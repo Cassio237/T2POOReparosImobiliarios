@@ -15,6 +15,8 @@ import javax.swing.JScrollPane;
 import java.awt.GridBagConstraints;
 import javax.swing.JButton;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
@@ -86,11 +88,17 @@ public class listaImoveisView extends JFrame {
 		listarImoveis(txtImoveis);
 		scrollPane.setViewportView(txtImoveis);
 
-		JButton btnAddImoveis = new JButton("Adicionar Imovel");
+		JButton btnAttImoveis = new JButton("Atualizar Lista Imovel");
+		btnAttImoveis.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sistema.iniciaDados();
+				listarImoveis(txtImoveis);
+			}
+		});
 		GridBagConstraints gbc_btnAddImoveis = new GridBagConstraints();
 		gbc_btnAddImoveis.gridx = 0;
 		gbc_btnAddImoveis.gridy = 1;
-		contentPane.add(btnAddImoveis, gbc_btnAddImoveis);
+		contentPane.add(btnAttImoveis, gbc_btnAddImoveis);
 	}
 
 	public void listarImoveis(JTextArea textArea) {
@@ -99,8 +107,7 @@ public class listaImoveisView extends JFrame {
 		try {
 			for (Imovel imovel : Imoveis) {
 				lista.append(String
-						.format("ID: " + imovel.getId() + " - Endereço: " + imovel.getEndereco() + " - Proprietário ID: "
-								+ imovel.getCliente().getId() + " - Nome: " + imovel.getCliente().getNome()+ "\n"));
+						.format("Endereço: " + imovel.getEndereco() + " - Proprietário Nome: " + imovel.getCliente().getNome()+ "\n"));
 			}
 			textArea.setText(lista.toString());
 		} catch (Exception e) {

@@ -8,8 +8,6 @@ public class Financeiro implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static int contador = 700;
-	private int id;
 	private Orcamento orcamento;
 	private LocalDate data;
 	private Boolean pago;
@@ -17,7 +15,6 @@ public class Financeiro implements Serializable{
 	private Double valor;
 	
 	public Financeiro(Orcamento orcamento, Boolean pago, Cliente responsavel, Double valor) {
-		this.id = contador++;
 		this.orcamento = orcamento;
 		this.data = LocalDate.now();
 		this.pago = pago;
@@ -65,9 +62,4 @@ public class Financeiro implements Serializable{
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-
-	public int getId() {
-		return id;
-	}
-
 }

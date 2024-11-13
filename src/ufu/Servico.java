@@ -18,13 +18,12 @@ public class Servico implements Material, Reparo, Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static int contador = 1;
-	private int id;
 	private Prestador prestador;
 	private Double valorServico, valorMateriais;
 	private String tipo;
 	private boolean concluido, temMateriais, comproMateriais;
 	private ArrayList<Materiais> listaMateriais = new ArrayList<Materiais>();
+	protected int id;
 	
 	private String arquivoMaterial = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Materiais";
 	
@@ -37,7 +36,7 @@ public class Servico implements Material, Reparo, Serializable{
 		concluido = false;
 		temMateriais = false;
 		comproMateriais = false;
-		this.id = contador++;
+		this.id = id++;
 	}
 	
 	public void iniciaDadosMaterias() { //inicializador que carrega dados existentes
@@ -162,10 +161,6 @@ public class Servico implements Material, Reparo, Serializable{
 		this.tipo = tipo;
 	}
 
-	public int getId() {
-		return id;
-	}
-
 	public boolean isConcluido() {
 		return concluido;
 	}
@@ -184,6 +179,14 @@ public class Servico implements Material, Reparo, Serializable{
 
 	public Double getValorMateriais() {
 		return valorMateriais;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

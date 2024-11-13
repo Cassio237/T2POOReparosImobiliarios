@@ -8,19 +8,12 @@ public abstract class Cliente implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String nome, endereco, telefone;
-	private int id;
-	private static int contador = 100;
 	
 	public Cliente(String nome, String endereco, String telefone) {
 		super();
 		this.nome = nome;
 		this.endereco = endereco;
 		this.telefone = telefone;
-		this.id = contador++;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public String getNome() {
@@ -46,7 +39,7 @@ public abstract class Cliente implements Serializable{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
+
 	abstract boolean validar(String valor); 
 	
 	public abstract String getDado(); //Metodo abstrato nao para obrigar e sim para facilitar o acesso a um atributo da classe filha

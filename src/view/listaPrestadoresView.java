@@ -15,6 +15,8 @@ import javax.swing.JScrollPane;
 import java.awt.GridBagConstraints;
 import javax.swing.JButton;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
@@ -86,11 +88,17 @@ public class listaPrestadoresView extends JFrame {
 		listarPrestadores(txtPrestadores);
 		scrollPane.setViewportView(txtPrestadores);
 
-		JButton btnAddPrestadores = new JButton("Adicionar prestador");
+		JButton btnAttPrestadores = new JButton("Atualizar Lista Prestador");
+		btnAttPrestadores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sistema.iniciaDados();
+				listarPrestadores(txtPrestadores);
+			}
+		});
 		GridBagConstraints gbc_btnAddPrestadores = new GridBagConstraints();
 		gbc_btnAddPrestadores.gridx = 0;
 		gbc_btnAddPrestadores.gridy = 1;
-		contentPane.add(btnAddPrestadores, gbc_btnAddPrestadores);
+		contentPane.add(btnAttPrestadores, gbc_btnAddPrestadores);
 	}
 
 	public void listarPrestadores(JTextArea textArea) {
@@ -98,7 +106,7 @@ public class listaPrestadoresView extends JFrame {
 		ArrayList<Prestador> Prestadores = sistema.getPrestadores();
 		try {
 			for (Prestador prestador : Prestadores) {
-				lista.append(String.format("ID: " + prestador.getId() + " - Nome: " + prestador.getNome()
+				lista.append(String.format(" - Nome: " + prestador.getNome()
 						+ " - Função principal: " + prestador.getFuncao() + "\n"));
 			}
 			textArea.setText(lista.toString());

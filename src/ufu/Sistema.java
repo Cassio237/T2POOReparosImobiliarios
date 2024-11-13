@@ -170,7 +170,7 @@ public class Sistema {
 	public void listarClientes() {
 		try {
 			for (Cliente cliente : clientes) {
-				System.out.println("ID: " + cliente.getId() + " Nome: " + cliente.getNome() + " " + cliente.getDado()
+				System.out.println("Nome: " + cliente.getNome() + " " + cliente.getDado()
 						+ " Endereco: " + cliente.getEndereco() + " Telefone: " + cliente.getTelefone());
 			}
 		} catch (Exception e) {
@@ -194,7 +194,7 @@ public class Sistema {
 	public void listarPrestador() {
 		try {
 			for(Prestador prestador : prestadores) {
-				System.out.println("ID: " + prestador.getId() + " Nome: " + prestador.getNome() + " Função principal: " + prestador.getFuncao());
+				System.out.println("Nome: " + prestador.getNome() + " Função principal: " + prestador.getFuncao());
 			}
 		} catch (Exception e) {
 			System.out.println("sistema.listarPrestador" + e);
@@ -202,10 +202,10 @@ public class Sistema {
 		}
 	}
 	
-	public Prestador pegaPrestador(int id) {
+	public Prestador pegaPrestador(String nome) {
 		try {
 			for(Prestador prestador : prestadores) {
-				if(prestador.getId() == id) {
+				if(prestador.getNome().equalsIgnoreCase(nome)) {
 					return prestador;
 				}
 			}
@@ -250,8 +250,7 @@ public class Sistema {
 	public void listarImovel() {
 		try {
 			for(Imovel imovel : imoveis) {
-				System.out.println("ID: " + imovel.getId() + " Endereço: " + imovel.getEndereco() + " Proprietário ID: " 
-						+ imovel.getCliente().getId() + " Nome: " + imovel.getCliente().getNome());
+				System.out.println("Endereço: " + imovel.getEndereco() + " Proprietário Nome: " + imovel.getCliente().getNome());
 			}
 		} catch (Exception e) {
 			System.out.println("sistema.listarImovel" + e);
@@ -259,10 +258,10 @@ public class Sistema {
 		}
 	}
 	
-	public Imovel pegaImovel(int id) {
+	public Imovel pegaImovel(String endereco) {
 		try {
 			for(Imovel imovel : imoveis) {
-				if(imovel.getId() == id) {
+				if(imovel.getEndereco().equalsIgnoreCase(endereco)) {
 					return imovel;
 				}
 			}
@@ -273,9 +272,9 @@ public class Sistema {
 		return null;
 	}
 	
-	public void iniciarOrcamento(int idImovel, String clienteNome) {
+	public void iniciarOrcamento(String endereco, String clienteNome) {
 		try {
-			Imovel imovel = pegaImovel(idImovel);
+			Imovel imovel = pegaImovel(endereco);
 			Cliente cliente = pegaCliente(clienteNome);
 			ultiOrcamento = new Orcamento(imovel, cliente); //crio uma "copia" do orcamento que esta sendo feito
 			orcamentos.add(ultiOrcamento);
@@ -329,9 +328,9 @@ public class Sistema {
 		
 	}
 	
-	public void addServicoOrcamento(int idPrestador, Double valor, String tipoServico) {
+	public void addServicoOrcamento(String nome, Double valor, String tipoServico) {
 		try {
-			Prestador prestador = pegaPrestador(idPrestador);
+			Prestador prestador = pegaPrestador(nome);
 			ultiOrcamento.criarServico(prestador, valor, tipoServico);
 			System.out.println("Adicionado!");
 			JOptionPane.showMessageDialog(null, "Adicionado!");
@@ -341,10 +340,10 @@ public class Sistema {
 		}
 	}
 	
-	public void addServicoOrcamento(int idOrcamento, int idPrestador, Double valor, String tipoServico) {
+	public void addServicoOrcamento(int idOrcamento, String nome, Double valor, String tipoServico) {
 		try {
 			Orcamento orcamento = pegaOrcamento(idOrcamento);
-			Prestador prestador = pegaPrestador(idPrestador);
+			Prestador prestador = pegaPrestador(nome);
 			orcamento.criarServico(prestador, valor, tipoServico);
 			System.out.println("Adicionado!");
 			JOptionPane.showMessageDialog(null, "Adicionado!");
@@ -429,7 +428,7 @@ public class Sistema {
 		try {
 			for(Financeiro financa : financas) {
 				
-				System.out.printf("ID: %d - Cliente: %s - Endereco: %s - Valor: RS %.2f Data: %s - Pago: %s\n", financa.getId(), 
+				System.out.printf("Cliente: %s - Endereco: %s - Valor: RS %.2f Data: %s - Pago: %s\n", 
 						financa.getResponsavel().getNome(),financa.getOrcamento().getImovel().getEndereco(), financa.getValor(), 
 						financa.getData(), financa.getPago());
 			}

@@ -64,6 +64,12 @@ public class MainView extends JFrame {
 		contentPane.setLayout(new GridLayout(0, 2, 15, 15));
 		
 		JButton btnAddCliente = new JButton("Adicionar Clientes");
+		btnAddCliente.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        addClienteView view = new addClienteView();
+		        view.setVisible(true);
+		    }
+		});
 		contentPane.add(btnAddCliente);
 		
 		JButton btnListCliente = new JButton("Listar Clientes");
@@ -88,6 +94,12 @@ public class MainView extends JFrame {
 		contentPane.add(btnListImovel);
 		
 		JButton btnAddPrestador = new JButton("Adicionar Prestador");
+		btnAddPrestador.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        addPrestadorView view = new addPrestadorView();
+		        view.setVisible(true);
+		    }
+		});
 		contentPane.add(btnAddPrestador);
 		
 		JButton btnListPrestador = new JButton("Listar Prestadores");

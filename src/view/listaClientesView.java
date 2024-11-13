@@ -21,6 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class listaClientesView extends JFrame {
 
@@ -86,11 +88,17 @@ public class listaClientesView extends JFrame {
 		listarClientes(txtClientes);
 		scrollPane.setViewportView(txtClientes);
 		
-		JButton btnAddClientes = new JButton("Adicionar Cliente");
+		JButton btnAttClientes = new JButton("Atualizar Lista Cliente");
+		btnAttClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sistema.iniciaDados();
+				listarClientes(txtClientes);
+			}
+		});
 		GridBagConstraints gbc_btnAddClientes = new GridBagConstraints();
 		gbc_btnAddClientes.gridx = 0;
 		gbc_btnAddClientes.gridy = 1;
-		contentPane.add(btnAddClientes, gbc_btnAddClientes);
+		contentPane.add(btnAttClientes, gbc_btnAddClientes);
 	}
 	
 	public void listarClientes(JTextArea textArea) {
@@ -99,8 +107,8 @@ public class listaClientesView extends JFrame {
 	    try {
 	        for (Cliente cliente : clientes) {
 	            lista.append(String.format(
-	                "ID: %d - Nome: %s - %s - Endereco: %s - Telefone: %s\n",
-	                cliente.getId(), cliente.getNome(), cliente.getDado(),
+	                "Nome: %s - %s - Endereco: %s - Telefone: %s\n",
+	                cliente.getNome(), cliente.getDado(),
 	                cliente.getEndereco(), cliente.getTelefone()
 	            ));
 	        }

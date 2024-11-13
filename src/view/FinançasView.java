@@ -93,7 +93,7 @@ public class FinançasView extends JFrame {
 		try {
 			for (Financeiro financa : financas) {
 				lista.append(String.format(
-						"ID: %d - Cliente: %s - Endereco: %s - Valor: R$ %.2f - Data: %s - Pago: %s\n", financa.getId(),
+						"Cliente: %s - Endereco: %s - Valor: R$ %.2f - Data: %s - Pago: %s\n",
 						financa.getResponsavel().getNome(), financa.getOrcamento().getImovel().getEndereco(),
 						financa.getValor(), financa.getData(), financa.getPago()));
 			}
