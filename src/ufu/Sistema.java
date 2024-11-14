@@ -202,41 +202,8 @@ public class Sistema {
 		}
 	}
 	
-	public Prestador pegaPrestador(String nome) {
+	public void criarImovel(String endereco, Cliente cliente) {
 		try {
-			for(Prestador prestador : prestadores) {
-				if(prestador.getNome().equalsIgnoreCase(nome)) {
-					return prestador;
-				}
-			}
-		} catch (Exception e) {
-			System.out.println("sistema.pegaPrestador" + e);
-			JOptionPane.showMessageDialog(null, "sistema.pegaPrestador" + e);
-		}
-		return null;
-	}
-	
-	public Cliente pegaCliente(String nome) {
-		try {
-			for(Cliente cliente : clientes) {
-				if (cliente.getNome().equalsIgnoreCase(nome)) {
-					return cliente;
-				}
-			}
-		} catch (Exception e) {
-			System.out.println("Sitema.pegaCliente" + e);
-			JOptionPane.showMessageDialog(null, "Sitema.pegaCliente" + e);
-		}
-		return null;
-	}
-	
-	public void criarImovel(String endereco, String nome) {
-		try {
-			Cliente cliente = pegaCliente(nome);
-			if(cliente == null) {
-				System.out.println("Cliente nao encontrado!");
-				return;
-			}
 			imoveis.add(new Imovel(endereco, cliente));
 			escreve(arquivoImovel, imoveis);
 			System.out.println("Adicionado!");
@@ -272,10 +239,8 @@ public class Sistema {
 		return null;
 	}
 	
-	public void iniciarOrcamento(String endereco, String clienteNome) {
+	public void iniciarOrcamento(Imovel imovel, Cliente cliente) {
 		try {
-			Imovel imovel = pegaImovel(endereco);
-			Cliente cliente = pegaCliente(clienteNome);
 			ultiOrcamento = new Orcamento(imovel, cliente); //crio uma "copia" do orcamento que esta sendo feito
 			orcamentos.add(ultiOrcamento);
 			escreve(arquivoOrcamento, orcamentos);
@@ -328,9 +293,8 @@ public class Sistema {
 		
 	}
 	
-	public void addServicoOrcamento(String nome, Double valor, String tipoServico) {
+	public void addServicoOrcamento(Prestador prestador, Double valor, String tipoServico) {
 		try {
-			Prestador prestador = pegaPrestador(nome);
 			ultiOrcamento.criarServico(prestador, valor, tipoServico);
 			System.out.println("Adicionado!");
 			JOptionPane.showMessageDialog(null, "Adicionado!");
@@ -340,10 +304,9 @@ public class Sistema {
 		}
 	}
 	
-	public void addServicoOrcamento(int idOrcamento, String nome, Double valor, String tipoServico) {
+	public void addServicoOrcamento(int idOrcamento, Prestador prestador, Double valor, String tipoServico) {
 		try {
 			Orcamento orcamento = pegaOrcamento(idOrcamento);
-			Prestador prestador = pegaPrestador(nome);
 			orcamento.criarServico(prestador, valor, tipoServico);
 			System.out.println("Adicionado!");
 			JOptionPane.showMessageDialog(null, "Adicionado!");

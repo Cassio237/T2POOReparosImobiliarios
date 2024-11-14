@@ -19,8 +19,14 @@ public class PessoaJuridica extends Cliente {
 		CNPJs.add(cnpj);
 	}
 	
+	@Override
+	public String toString() {
+	    return String.format("Nome: %s - CNPJ: %s",
+	                         getNome(), cnpj);
+	}
+	
 	public String getDado() {
-		return "CNPJ: " + cnpj;
+		return cnpj;
 	}
 
 	public void setCnpj(String cnpj) {

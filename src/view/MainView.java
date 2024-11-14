@@ -82,6 +82,12 @@ public class MainView extends JFrame {
 		contentPane.add(btnListCliente);
 		
 		JButton btnAddImovel = new JButton("Adicionar Imovel");
+		btnAddImovel.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        addImovelView view = new addImovelView();
+		        view.setVisible(true);
+		    }
+		});
 		contentPane.add(btnAddImovel);
 		
 		JButton btnListImovel = new JButton("Listar Imoveis");

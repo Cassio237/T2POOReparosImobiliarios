@@ -20,8 +20,14 @@ public class PessoaFisica extends Cliente{
 		CPFs.add(cpf);
 	}
 	
+	@Override
+	public String toString() {
+	    return String.format("Nome: %s - CPF: %s",
+	                         getNome(), cpf);
+	}
+	
 	public String getDado() {
-		return "CPF: " + cpf;
+		return cpf;
 	}
 	
 	// Aqui eu valido verificando se nao ha o mesmo cpf (poderia colocar o famoso validador de cpf mas seria complicar o uso). *seria melhor na classe sistema
