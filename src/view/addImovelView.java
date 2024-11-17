@@ -39,9 +39,9 @@ public class addImovelView extends JFrame {
 	private JTextField textDado;
 	private JTextField textTelefone;
 	
-	Sistema sistema = new Sistema();
-	Cliente clienteSelecionado;
-	DefaultListModel<Cliente> listaCliente = new DefaultListModel<>();
+	private static Sistema sistema = new Sistema();
+	protected Cliente clienteSelecionado;
+	private DefaultListModel<Cliente> listaCliente = new DefaultListModel<Cliente>();
 	/**
 	 * Launch the application.
 	 */
@@ -225,13 +225,13 @@ public class addImovelView extends JFrame {
 		gbc_scrollPane.gridy = 0;
 		panel_1.add(scrollPane, gbc_scrollPane);
 		
-		JList<Cliente> listCliente = new JList<>(listaCliente);
+		JList<Cliente> listCliente = new JList<Cliente>(listaCliente);
 		listarClientes(listaCliente);
 		scrollPane.setViewportView(listCliente);
 		
 		JLabel lblNewLabel_2 = new JLabel("Selecione o Cliente");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
 		scrollPane.setColumnHeaderView(lblNewLabel_2);
 		
 		JButton btnInserir = new JButton("Inserir");

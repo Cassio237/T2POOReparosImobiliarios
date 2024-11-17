@@ -23,6 +23,16 @@ public class Financeiro implements Serializable{
 		orcamento.setAprovado(true);
 	}
 	
+	@Override
+	public String toString() {
+		String pagoString = "NÃO";
+		if (pago) {
+			pagoString = "SIM";
+		}
+		return String.format("Orcamento ID: %d - Cliente: %s - Valor: R$ %.2f - Data: %s - Pago: %s", orcamento.getId(), orcamento.getCliente().getNome(),
+				valor, data, pagoString);
+	}
+	
 	public Orcamento getOrcamento() {
 		return orcamento;
 	}
@@ -42,11 +52,7 @@ public class Financeiro implements Serializable{
 	public Boolean getPago() {
 		return pago;
 	}
-
-	public void setPago(Boolean pago) {
-		this.pago = pago;
-	}
-
+	
 	public Cliente getResponsavel() {
 		return responsavel;
 	}
@@ -62,4 +68,16 @@ public class Financeiro implements Serializable{
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
+	
+	public String toStringPago() {
+		if (this.pago) {
+			return "SIM";
+		}
+		return "NÃO";
+	}
+
+	public void mudaPago() {
+		this.pago = !this.pago;
+	}
+
 }

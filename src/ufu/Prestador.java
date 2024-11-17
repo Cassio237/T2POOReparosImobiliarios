@@ -2,6 +2,8 @@ package ufu;
 
 import java.io.Serializable;
 
+import javax.swing.JOptionPane;
+
 public class Prestador implements Serializable{
 	/**
 	 * 
@@ -12,6 +14,16 @@ public class Prestador implements Serializable{
 	public Prestador(String nome, String funcao) {
 		this.nome = nome;
 		this.funcao = funcao;
+	}
+	
+	@Override
+	public String toString() {
+		try {
+			return String.format("Nome: " + getNome() + " - Função: " + getFuncao());
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "toString Orcamento" + e);
+		}
+		return null;
 	}
 
 	public String getNome() {

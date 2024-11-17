@@ -53,7 +53,6 @@ public class listaImoveisView extends JFrame {
 	 */
 	public listaImoveisView() {
 		sistema.iniciaDados();
-
 		setTitle("Lista de Imoveis");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -77,13 +76,15 @@ public class listaImoveisView extends JFrame {
 		contentPane.add(scrollPane, gbc_scrollPane);
 
 		txtListaDeImoveis = new JTextField();
-		txtListaDeImoveis.setFont(new Font("Tahoma", Font.BOLD, 12));
+		txtListaDeImoveis.setEditable(false);
+		txtListaDeImoveis.setFont(new Font("Tahoma", Font.BOLD, 14));
 		txtListaDeImoveis.setHorizontalAlignment(SwingConstants.CENTER);
 		txtListaDeImoveis.setText("Lista de Imoveis");
 		scrollPane.setColumnHeaderView(txtListaDeImoveis);
 		txtListaDeImoveis.setColumns(10);
 
 		JTextArea txtImoveis = new JTextArea();
+		txtImoveis.setFont(new Font("Tahoma", Font.BOLD, 12));
 		txtImoveis.setEditable(false);
 		listarImoveis(txtImoveis);
 		scrollPane.setViewportView(txtImoveis);
@@ -107,7 +108,7 @@ public class listaImoveisView extends JFrame {
 		try {
 			for (Imovel imovel : Imoveis) {
 				lista.append(String
-						.format("Endereço: " + imovel.getEndereco() + " - Proprietário Nome: " + imovel.getCliente().getNome()+ "\n"));
+						.format("Endereço: " + imovel.getEndereco() + " -- Proprietário Nome: " + imovel.getCliente().getNome()+ "\n"));
 			}
 			textArea.setText(lista.toString());
 		} catch (Exception e) {

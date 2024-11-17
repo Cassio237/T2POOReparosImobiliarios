@@ -27,7 +27,7 @@ public class addPrestadorView extends JFrame {
 	private JTextField textNome;
 	private JTextField textFuncao;
 	
-	Sistema sistema= new Sistema();
+	private static Sistema sistema = new Sistema();
 
 	/**
 	 * Launch the application.

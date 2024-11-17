@@ -14,6 +14,12 @@ public class Imovel implements Serializable{
 		this.endereco = endereco;
 		this.cliente = cliente;
 	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Endereço: " + endereco;
+	}
 
 	public String getEndereco() {
 		return endereco;

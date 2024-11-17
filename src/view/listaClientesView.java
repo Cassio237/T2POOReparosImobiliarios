@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ufu.Cliente;
+import ufu.PessoaJuridica;
 import ufu.Sistema;
 
 import java.awt.GridBagLayout;
@@ -53,7 +54,6 @@ public class listaClientesView extends JFrame {
 	 */
 	public listaClientesView() {
 		sistema.iniciaDados();
-	
 		setTitle("Lista de Clientes");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -77,13 +77,15 @@ public class listaClientesView extends JFrame {
 		contentPane.add(scrollPane, gbc_scrollPane);
 		
 		txtListaDeClientes = new JTextField();
-		txtListaDeClientes.setFont(new Font("Tahoma", Font.BOLD, 12));
+		txtListaDeClientes.setEditable(false);
+		txtListaDeClientes.setFont(new Font("Tahoma", Font.BOLD, 14));
 		txtListaDeClientes.setHorizontalAlignment(SwingConstants.CENTER);
 		txtListaDeClientes.setText("Lista de Clientes");
 		scrollPane.setColumnHeaderView(txtListaDeClientes);
 		txtListaDeClientes.setColumns(10);
 		
 		JTextArea txtClientes = new JTextArea();
+		txtClientes.setFont(new Font("Tahoma", Font.BOLD, 12));
 		txtClientes.setEditable(false);
 		listarClientes(txtClientes);
 		scrollPane.setViewportView(txtClientes);
@@ -106,8 +108,12 @@ public class listaClientesView extends JFrame {
 	    ArrayList<Cliente> clientes = sistema.getClientes();
 	    try {
 	        for (Cliente cliente : clientes) {
+	        	String dado = "CPF:";
+	        	if (cliente instanceof PessoaJuridica) {
+	        		dado = "CNPJ:";
+				}
 	            lista.append(String.format(
-	                "Nome: %s - %s - Endereco: %s - Telefone: %s\n",
+	                "Nome: %s -- " + dado +  " %s -- Endereco: %s -- Telefone: %s\n",
 	                cliente.getNome(), cliente.getDado(),
 	                cliente.getEndereco(), cliente.getTelefone()
 	            ));

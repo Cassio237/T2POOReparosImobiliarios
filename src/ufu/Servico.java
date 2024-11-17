@@ -19,11 +19,10 @@ public class Servico implements Material, Reparo, Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Prestador prestador;
-	private Double valorServico, valorMateriais;
+	private Double valorServico, valorMateriais, valorTotal;
 	private String tipo;
 	private boolean concluido, temMateriais, comproMateriais;
 	private ArrayList<Materiais> listaMateriais = new ArrayList<Materiais>();
-	protected int id;
 	
 	private String arquivoMaterial = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Materiais";
 	
@@ -36,7 +35,7 @@ public class Servico implements Material, Reparo, Serializable{
 		concluido = false;
 		temMateriais = false;
 		comproMateriais = false;
-		this.id = id++;
+		this.valorTotal = this.valorServico;
 	}
 	
 	public void iniciaDadosMaterias() { //inicializador que carrega dados existentes
@@ -46,7 +45,16 @@ public class Servico implements Material, Reparo, Serializable{
 	    }
 	}
 	
-	public <E> ArrayList<E> ler(String caminho) { // uso o tipo generic <E> para todos arrays, vou reutilizar o metodo
+	public ArrayList<Materiais> getListaMateriais() {
+		return listaMateriais;
+	}
+
+	public <E> ArrayList<E> ler(String caminho) {
+		File arquivo = new File(caminho);
+		if (!arquivo.exists() || arquivo.length() == 0) {
+			return new ArrayList<E>();
+		}
+		
 		FileInputStream leitor = null;
 		ObjectInputStream object = null;
 
@@ -54,7 +62,7 @@ public class Servico implements Material, Reparo, Serializable{
 			leitor = new FileInputStream(caminho);
 			object = new ObjectInputStream(leitor);
 
-			@SuppressWarnings("unchecked") // sei lá a IDE avisava aqui abaixo, isso faz um Casting Seguro **
+			@SuppressWarnings("unchecked")
 			ArrayList<E> lista = (ArrayList<E>) object.readObject();
 			return lista;
 		} catch (EOFException e) { // uso do EOFException
@@ -107,14 +115,20 @@ public class Servico implements Material, Reparo, Serializable{
 		listaMateriais.add(materiais);
 		escreve(arquivoMaterial, listaMateriais);
 		valorMateriais = materiais.getValorTotal();
+		valorTotal = valorTotal + valorMateriais;
 	}
 	
-	public void listaMateriais() {
-		for(Materiais materiais : listaMateriais) {
-			System.out.printf("Nome: %s - Quantidade: %d - Preço Unitario: R$ %.2f - Preço Total: R$ %.2f\n", materiais.getNome(), materiais.getQuantidade(),
-					materiais.getValor(), materiais.getValorTotal());
-		}
+	public String listaMateriaisDetalhado() {
+	    StringBuilder detalhes3 = new StringBuilder();
+	    for (Materiais material : listaMateriais) {
+	        detalhes3.append(String.format("Nome: %s - Quantidade: %d - Preço Unitário: R$ %.2f - Preço Total: R$ %.2f\n",
+	                material.getNome(), material.getQuantidade(),
+	                material.getValor(), material.getValorTotal()));
+	        System.out.println(listaMateriais.size());
+	    }
+	    return detalhes3.toString();
 	}
+
 	
 	@Override
 	public boolean concluirReparos() {
@@ -181,12 +195,8 @@ public class Servico implements Material, Reparo, Serializable{
 		return valorMateriais;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+	public Double getValorTotal() {
+		return valorTotal;
 	}
 
 }

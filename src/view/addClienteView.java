@@ -36,7 +36,7 @@ public class addClienteView extends JFrame {
 	private JRadioButton rdCNPJ;
 	private JLabel lblNewLabel_4;
 
-	Sistema sistema = new Sistema();
+	private static Sistema sistema = new Sistema();
 
 	/**
 	 * Launch the application.
@@ -192,12 +192,12 @@ public class addClienteView extends JFrame {
 					return;
 				}
 				if (rdCPF.isSelected()) {
-					sistema.criarClienteFisica(textDado.getText(), textEndereco.getText(), textTelefone.getText(),
+					sistema.criarClienteFisica(textNome.getText(), textEndereco.getText(), textTelefone.getText(),
 							textDado.getText());
 					limparCampos();
 					
 				} else if (rdCNPJ.isSelected()) {
-					sistema.criarClienteJuridica(textDado.getText(), textEndereco.getText(), textTelefone.getText(),
+					sistema.criarClienteJuridica(textNome.getText(), textEndereco.getText(), textTelefone.getText(),
 							textDado.getText());
 					limparCampos();
 				} else {

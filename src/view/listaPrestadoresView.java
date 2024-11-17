@@ -53,7 +53,6 @@ public class listaPrestadoresView extends JFrame {
 	 */
 	public listaPrestadoresView() {
 		sistema.iniciaDados();
-
 		setTitle("Lista de Prestadores");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -77,13 +76,14 @@ public class listaPrestadoresView extends JFrame {
 		contentPane.add(scrollPane, gbc_scrollPane);
 
 		txtListaDePrestadores = new JTextField();
-		txtListaDePrestadores.setFont(new Font("Tahoma", Font.BOLD, 12));
+		txtListaDePrestadores.setFont(new Font("Tahoma", Font.BOLD, 14));
 		txtListaDePrestadores.setHorizontalAlignment(SwingConstants.CENTER);
 		txtListaDePrestadores.setText("Lista de Prestadores");
 		scrollPane.setColumnHeaderView(txtListaDePrestadores);
 		txtListaDePrestadores.setColumns(10);
 
 		JTextArea txtPrestadores = new JTextArea();
+		txtPrestadores.setFont(new Font("Tahoma", Font.BOLD, 12));
 		txtPrestadores.setEditable(false);
 		listarPrestadores(txtPrestadores);
 		scrollPane.setViewportView(txtPrestadores);
@@ -106,8 +106,8 @@ public class listaPrestadoresView extends JFrame {
 		ArrayList<Prestador> Prestadores = sistema.getPrestadores();
 		try {
 			for (Prestador prestador : Prestadores) {
-				lista.append(String.format(" - Nome: " + prestador.getNome()
-						+ " - Função principal: " + prestador.getFuncao() + "\n"));
+				lista.append(String.format("Nome: " + prestador.getNome()
+						+ " -- Função principal:  " + prestador.getFuncao() + "\n"));
 			}
 			textArea.setText(lista.toString());
 		} catch (Exception e) {
