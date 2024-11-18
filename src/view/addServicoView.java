@@ -1,5 +1,8 @@
 package view;
 
+//Como para adicionar um serviço tem que antes receber um objeto orcamento nao deixei possivel usa o main nessa pagina, se colocar null compila
+//Por favor chame pela classe addOrcamentoView
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;

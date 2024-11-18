@@ -24,7 +24,7 @@ public class Servico implements Material, Reparo, Serializable{
 	private boolean concluido, temMateriais, comproMateriais;
 	private ArrayList<Materiais> listaMateriais = new ArrayList<Materiais>();
 	
-	private String arquivoMaterial = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Materiais";
+	private String arquivoMaterial = "Materiais";
 	
 	public Servico() {} //Contrutor so para chame um metodo q inicia dados
 	

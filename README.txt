@@ -3,6 +3,14 @@ Guilherme Aparecido de Assis Alves 14211BSI330
 Wellington dos Reis Ferreira 12111BSI286
 (Linha 12)
 
+-- Metodo Exception em MinhaExcessoes com nome de OrcamentoException
+-- Metodos de leitura e escrita em Uufu na classe sistema com o nome de ler e escreve, os arquivos ficam em "Files"
+-- Quase todas view compilam sozinhas, somente addServicoView e addMaterialView que nao
+
+Nota: Tentei fazer todas compilarem de forma independente, instancio um Sistema para cada tela, fiz algumas mudanças como remover os ID e me arrependi pois dificulta deixar as cada tela independente.
+
+
+**********
 Arquivos estão dentro da pasta src/ufu.
 
 O modelo foi escolhido pelo grupo e segue uma logica de criar orcamentos para reparo imobiliarios, serao feito orçamentos simples que poderao ter servicos e materiais, os Orcamento tem imoveis que tem proprietarios que podem ser ou nao responsaveis pelo orçameto

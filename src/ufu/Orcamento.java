@@ -25,8 +25,7 @@ public class Orcamento implements Serializable {
 	private boolean aprovado;
 	protected int id;
 
-	private String arquivoServico = System.getProperty("user.dir") + File.separator + "Files" + File.separator
-			+ "Serviço";
+	private String arquivoServico = "Serviço";
 
 	public Orcamento() {
 	} // Contrutor so para chame um metodo q inicia dados

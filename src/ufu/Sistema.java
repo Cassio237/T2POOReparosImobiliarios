@@ -41,11 +41,11 @@ public class Sistema {
 		return financas;
 	}
 
-	String arquivoCliente = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Cliente";
-	String arquivoPrestador = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Prestador";
-	String arquivoImovel = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Imovel";
-	String arquivoOrcamento = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Orcamento";
-	String arquivoFinanca = System.getProperty("user.dir") + File.separator + "Files" + File.separator + "Financa";
+	String arquivoCliente ="Cliente";
+	String arquivoPrestador = "Prestador";
+	String arquivoImovel = "Imovel";
+	String arquivoOrcamento = "Orcamento";
+	String arquivoFinanca = "Financa";
 	
 	public Orcamento ultiOrcamento;
 	
